@@ -578,6 +578,8 @@ export default {
       contextMenuList: [],
       // 当前激活的菜单
       activeMenu: null,
+      // 铅笔等级（1-10）
+      penLevel: 1,
       // 是否全屏
       isFullScreen: false,
       // 禁用
@@ -859,7 +861,7 @@ export default {
           el.on()
           el.setOption('dotSize', 18)
           el.setOption('minWidth', 18)
-          el.setOption('maxWidth', 18)
+          el.setOption('maxWidth', 18 * this.penLevel * 0.5)
           // FIXME 【BUG】设置画笔为背景色，但是并有没有什么用
           el.setOption('penColor', _t.currentBoard.formData.backgroundColor)
           // 取消直线模式
@@ -937,6 +939,7 @@ export default {
           el.setOption('dotSize', val)
           el.setOption('minWidth', val * 0.3)
           el.setOption('maxWidth', val * 1.7)
+          this.penLevel = val
           break
         case 'backgroundColor':
           _t.$Modal.confirm({
